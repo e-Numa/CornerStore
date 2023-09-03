@@ -4,6 +4,7 @@ import com.Enuma.Model.Cashier;
 import com.Enuma.Model.Customer;
 import com.Enuma.Model.Manager;
 import com.Enuma.ServiceImp.ManagerialServiceImpl;
+import com.Enuma.ServiceImp.Product;
 import com.Enuma.ServiceImp.RetailServicesImpl;
 import com.Enuma.SubServices.ManagerialServices;
 
@@ -20,6 +21,18 @@ public class Main {
 
         //Cashier Services imported
         RetailServicesImpl retailServices = new RetailServicesImpl(cashier);
+
+
+        //New product and store imported
+        new Product().addProductsToStore();
+//        System.out.println("Dairy");
+//        new Product().viewItems(new Product().getDairy()); //Calls the product list from the csv file
+//        System.out.println();
+//
+//        System.out.println("Drinks");
+//        new Product().viewItems(new Product().getDrink()); //Calls the product list from the csv file
+//        System.out.println();
+
 
         //Customer imported
         Customer customer = new Customer();
@@ -43,14 +56,14 @@ public class Main {
         customer.makePurchaseOrder("Coca Cola");
         customer.makePurchaseOrder("Condoms");*/
 
+        customer.makePurchaseOrder("Fanta",5);
+        //customer.makePurchaseOrder("Peak Milk", 4);
+        customer.makePurchaseOrder("Bottled Water", 6);
+
         //make a buy request
         customer.completePurchaseOrder();
 
         retailServices.issueReceipt(customer);
-        System.out.println(cashier.getName() + " Dispense Receipt");
-
-        customer.makePurchaseOrder("Fanta 60cl",5);
-        customer.makePurchaseOrder("Peak Full Cream Refill 360g", 4);
-        customer.makePurchaseOrder("Bottled Water", 6);
+        //System.out.println(cashier.getName() + " Dispense Receipt");
     }
 }

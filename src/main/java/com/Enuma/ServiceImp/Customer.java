@@ -1,5 +1,7 @@
-package com.Enuma.Model;
+package com.Enuma.ServiceImp;
 
+import com.Enuma.Model.CustomerModel;
+import com.Enuma.Model.ProductProperties;
 import com.Enuma.ServiceImp.Product;
 import com.Enuma.SubServices.CATEGORY;
 
@@ -8,7 +10,14 @@ import java.util.Map;
 
 public class Customer {
 
+
+    private CustomerModel customer;
+
     private Map<String, ProductProperties> shoppingCart = new HashMap<>();
+
+    public Customer(CustomerModel customer) {
+        this.customer = customer;
+    }
 
     public Customer() {
     }
@@ -69,6 +78,14 @@ public class Customer {
             System.out.println();
         }
         System.out.println("Please proceed to payment" + '\n');
+
+        customer.setShoppingCart(shoppingCart);
+
+        //FIFO Queue
+        new RetailServicesImpl().getCustomersPriorityQueue().add(customer);
+
+        //Priority Queue
+        new RetailServicesImpl().getCustomersFIFOQueue().add(customer);
     }
     public  Map<String,ProductProperties> getShoppingCart() {
         return shoppingCart;
